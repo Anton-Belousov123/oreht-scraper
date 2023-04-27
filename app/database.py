@@ -17,6 +17,7 @@ class DBObj:
     t_price: float
     t_type: str
     stage: str
+    t_article: int
 
 
 class Database:
@@ -37,9 +38,9 @@ class Database:
             return None
         return DBObj(
             record[0], record[1], record[2], record[3], record[4], record[5], record[6], record[7], record[8],
-            record[9], record[10])
+            record[9], record[10], record[11])
 
-    def update_item(self, item: Item):
+    def update_item(self, item: Item, article: str):
         self.cur.execute(f"UPDATE {self.table_name} SET s_name=%s, s_url=%s, s_photo=%s,"
-                         f" s_price=%s, stage=%s", (item.name, item.url, item.photo, item.price, 'Source parsed'))
+                         f" s_price=%s, stage=%s t_type=%s WHERE s_article=%s", (item.name, item.url, item.photo, item.price, 'Source parsed', 'ozon', article))
         self.conn.commit()

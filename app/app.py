@@ -13,5 +13,5 @@ def start_app():
             time.sleep(60)
             continue
         item = scraper.scrape_item(dbobj.s_article)
-        database.update_item(item)
+        database.update_item(item, dbobj.s_article)
 
