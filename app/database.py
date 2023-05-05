@@ -34,6 +34,7 @@ class Database:
     def get_code(self):
         self.cur.execute(f"SELECT * FROM {self.table_name} WHERE stage=%s", ("Created",))
         record = self.cur.fetchone()
+        print(record)
         if not record:
             return None
         return DBObj(
@@ -42,5 +43,5 @@ class Database:
 
     def update_item(self, item: Item, article: str):
         self.cur.execute(f"UPDATE {self.table_name} SET s_name=%s, s_url=%s, s_photo=%s,"
-                         f" s_price=%s, stage=%s t_type=%s WHERE s_article=%s", (item.name, item.url, item.photo, item.price, 'Source parsed', 'ozon', article))
+                         f" s_price=%s, stage=%s, t_type=%s WHERE s_article=%s", (item.name, item.url, item.photo, item.price, 'Source parsed', 'ozon', article))
         self.conn.commit()
